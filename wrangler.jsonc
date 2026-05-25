@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tanstack-start-app",
+  "compatibility_date": "2025-09-24",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "src/server.ts",
+  "vars": {
+    "SURVEY_SHEET_CSV_URL": "https://docs.google.com/spreadsheets/d/1nZyjO2-6i4mJBUDk9DGKnktilaP2tu6aoyWQfWB8cTg/gviz/tq?tqx=out:csv",
+  },
+}
