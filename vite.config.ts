@@ -5,12 +5,16 @@ import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import { nitro } from "nitro/vite";
 
+const isVercel = Boolean(process.env.VERCEL);
+
 export default defineConfig({
   plugins: [
     tanstackStart({
       customViteReactPlugin: true,
     }),
-    nitro(),
+    nitro({
+      preset: isVercel ? "vercel" : undefined,
+    }),
     react(),
     tailwindcss(),
     tsConfigPaths(),

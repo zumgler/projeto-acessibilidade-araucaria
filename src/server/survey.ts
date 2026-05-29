@@ -1,25 +1,12 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getSurveySheetCsvUrl } from "@/lib/survey-config";
 import { FALLBACK_SURVEY_STATS } from "@/lib/survey-fallback";
 import { parseSurveyCsv } from "@/lib/parse-survey-csv";
 import type { SurveyStatsPayload } from "@/lib/survey-types";
 
-function getSheetCsvUrl() {
-  return process.env.SURVEY_SHEET_CSV_URL?.trim() || "";
-}
-
 export const fetchSurveyStats = createServerFn({ method: "GET" }).handler(
   async (): Promise<SurveyStatsPayload> => {
-    const sheetUrl = getSheetCsvUrl();
-
-    if (!sheetUrl) {
-      return {
-        ...FALLBACK_SURVEY_STATS,
-        source: "static",
-        updatedAt: null,
-        fetchError:
-          "Defina SURVEY_SHEET_CSV_URL com o link CSV da planilha de respostas do Google Forms.",
-      };
-    }
+    const sheetUrl = getSurveySheetCsvUrl();
 
     try {
       const response = await fetch(sheetUrl, {
